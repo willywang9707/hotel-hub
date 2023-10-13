@@ -1,19 +1,22 @@
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Toast from "./utils/Toast";
+import { BrowserRouter, Routes, Route, Outlet, Link } from "react-router-dom";
+import "./index.css";
+import AppLayout from "./ui/AppLayout";
+import Dashboard from "./pages/Dashboard";
+import NoMatch from "./ui/NoMatch";
 
 function App() {
-    const notify = () => Toast.error("hello");
-    const notify2 = () => Toast.info("hello");
-    const notify3 = () => Toast.success("hello");
-    const notify4 = () => Toast.warning("hello");
-
     return (
         <div>
-            <button onClick={notify}>Notify!</button>
-            <button onClick={notify2}>Notify!</button>
-            <button onClick={notify3}>Notify!</button>
-            <button onClick={notify4}>Notify!</button>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<AppLayout />}>
+                        <Route index element={<Dashboard />} />
+                        <Route path="*" element={<NoMatch />} />
+                    </Route>
+                </Routes>
+            </BrowserRouter>
 
             <ToastContainer
                 position="bottom-right"
